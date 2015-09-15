@@ -14,6 +14,9 @@
 
  <img src="https://github.com/GcsSloop/Rocker/blob/master/art/Rocker1.jpeg" width = "320" height = "560" alt="rocker3" align=center />  <img src="https://github.com/GcsSloop/Rocker/blob/master/art/Rocker2.jpeg" width = "320" height = "560" alt="rocker3" align=center />
  
+## <a href="http://pan.baidu.com/share/link?shareid=1802923607&uk=3009583694&fid=188394437825762" target="_blank">点击这里可以观看效果视频</a>
+
+ 
 # 使用示例：
 ## 1.在布局文件中添加摇杆
  
