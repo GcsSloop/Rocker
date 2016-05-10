@@ -1,6 +1,6 @@
 # Rocker
 安卓虚拟摇杆
-### 作者微博: [@安卓攻城师sloop](http://weibo.com/5459430586)
+### 作者微博: [@GcsSloop](http://weibo.com/GcsSloop)
 
 # 说明
 由于需要制作一个控制小车移动的应用，使用按键控制不太舒服，故制作了一个虚拟摇杆。
@@ -73,8 +73,10 @@
 ### 参考的文章： [android 虚拟摇杆图片版](http://blog.csdn.net/jwzhangjie/article/details/8839744)
 
 
-## 我的相关链接
+## About Me
 
-[知乎](https://www.zhihu.com/people/li-yu-long-38) | [微博](http://weibo.com/5459430586) | [CSDN](http://blog.csdn.net/u013831257?viewmode=list) | [Github](https://github.com/GcsSloop)
- --- | --- | --- | ---
-![](http://ww2.sinaimg.cn/mw690/005Xtdi2gw1f12thhjxn0j30810b4dhe.jpg) | ![](http://ww2.sinaimg.cn/mw690/005Xtdi2gw1f12t31cqbtj30b40b4gnp.jpg) | ![](http://ww2.sinaimg.cn/mw690/005Xtdi2gw1f12t3d4rnvj30b40b4jti.jpg) | ![](http://ww4.sinaimg.cn/mw690/005Xtdi2gw1f12t3mosq5j30b40b40tr.jpg)
+### 作者微博: [@GcsSloop](http://weibo.com/GcsSloop)
+
+<a href="https://github.com/GcsSloop/SloopBlog/blob/master/FINDME.md" target="_blank"> <img src="http://ww4.sinaimg.cn/large/005Xtdi2gw1f1qn89ihu3j315o0dwwjc.jpg" width=300 height=100 /> </a>
+
+
