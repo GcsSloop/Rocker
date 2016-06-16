@@ -1,5 +1,7 @@
 # Rocker
-安卓虚拟摇杆
+
+一个安卓虚拟摇杆程序，可作为游戏控制器，活着小车遥控器。
+
 ### 作者微博: [@GcsSloop](http://weibo.com/GcsSloop)
 
 # 说明
