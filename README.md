@@ -1,16 +1,32 @@
 # Rocker
 
-一个安卓虚拟摇杆程序，可作为游戏控制器，活着小车遥控器。
+一个安卓虚拟摇杆程序，可作为游戏控制器或者小车遥控器。
 
 ### 作者微博: [@GcsSloop](http://weibo.com/GcsSloop)
 
-# 说明
+# 摘要
 由于需要制作一个控制小车移动的应用，使用按键控制不太舒服，故制作了一个虚拟摇杆。
+之前的摇杆程序只是满足了基本功能，还有很多不方便以及不合理的地方，本次对其进行了重构，使其结构更佳合理，也完善了之前不足的部分。
 
-该摇杆原理十分简单，就是继承一个surfaceView，然后根据用户操作不断重绘界面，同时返回给用户当前角度。
-如果用户不指定摇杆背景和摇杆，则默认绘制两个圆形，效果如下图所示。
+**目前已完成内容:**
 
-<img src="https://github.com/GcsSloop/Rocker/blob/master/art/Rocker3.jpeg" width = "320" height = "560" alt="rocker3" align=center />  <img src="https://github.com/GcsSloop/Rocker/blob/master/art/Rocker4.jpeg" width = "320" height = "560" alt="rocker3" align=center />
+* 程序结构更佳合理
+* 视图大小自适应
+* 支持界面预览
+* 支持在界面文件中直接配置参数
+* 增加定时发送数据功能
+
+## 效果预览
+
+### 默认参数
+
+``` xml
+<com.gcssloop.widget.RockerView
+	android:id="@+id/rocker"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"/>
+```
+![](http://ww1.sinaimg.cn/large/005Xtdi2jw1f4y0d7x353j30dw0mot99.jpg)
  
 摇杆的图片和背景图片可以随意指定，并且在运行过程中也可以更换（ps：图片内容需要为圆形且背景透明），指定图片后效果如下：
 
