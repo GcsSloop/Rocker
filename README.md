@@ -42,6 +42,8 @@ refresh_cycle     | 刷新周期 | integer          | 30ms   | 界面刷新周�
 > 
 **视图大小会根据 区域半径以及摇杆半径值自适应，一般使用 wrap_content 即可。**
 
+**请在 layout 文件的根节点添加命名空间: `xmlns:rocker="http://schemas.android.com/apk/res-auto"`**
+
 ``` xml
 <com.gcssloop.widget.RockerView
 	android:id="@+id/rocker"
