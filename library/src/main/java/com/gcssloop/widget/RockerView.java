@@ -113,13 +113,9 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
-        if (isInEditMode()){
-            DEFAULT_AREA_RADIUS = 75;
-            DEFAULT_ROCKER_RADIUS = 25;
-        }
 
-        DEFAULT_AREA_RADIUS = DensityUtils.dip2px(context, DEFAULT_AREA_RADIUS);
-        DEFAULT_ROCKER_RADIUS = DensityUtils.dip2px(context, DEFAULT_ROCKER_RADIUS);
+        DEFAULT_AREA_RADIUS = DensityUtils.dip2px(context, 75);
+        DEFAULT_ROCKER_RADIUS = DensityUtils.dip2px(context, 25);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.viewsupport);
 
