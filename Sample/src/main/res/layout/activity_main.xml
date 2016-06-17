@@ -10,11 +10,11 @@
     tools:context="com.gcssloop.rockertest.MainActivity">
 
     <com.gcssloop.widget.RockerView
+        android:id="@+id/rocker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         rocker:area_background="@drawable/area_bg"
         rocker:area_radius="80dp"
-        rocker:refresh_cycle="50"
         rocker:rocker_background="@drawable/rocker_bg"
         rocker:rocker_radius="30dp"/>
 

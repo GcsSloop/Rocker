@@ -13,6 +13,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -74,8 +75,8 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
 
 
     private RockerListener mListener;
-    private static final int EVENT_ACTION = 1;
-    private static final int EVENT_CLOCK = 2;
+    public static final int EVENT_ACTION = 1;
+    public static final int EVENT_CLOCK = 2;
 
 
     private int mRefreshCycle = 30;
@@ -247,7 +248,6 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
 
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 //如果屏幕接触点不在摇杆挥动范围内,则不处理
-                //  Log.e("Rocker", "len:"+len);
                 if (len > mAreaRadius) {
                     return true;
                 }
@@ -357,7 +357,7 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
                 mListener.callback(EVENT_CLOCK, -1);
             } else {
                 float radian = MathUtils.getRadian(mAreaPosition, new Point(mRockerPosition.x, mRockerPosition.y));
-                mListener.callback(EVENT_ACTION, RockerView.this.getAngleConvert(radian));
+                mListener.callback(EVENT_CLOCK, RockerView.this.getAngleConvert(radian));
             }
         }
     }
@@ -442,7 +442,7 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
         mRockerBitmap = null;
     }
 
-    public void setListener(RockerListener listener) {
+    public void setListener(@NonNull RockerListener listener) {
         mListener = listener;
     }
 
