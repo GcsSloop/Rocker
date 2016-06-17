@@ -96,6 +96,27 @@ if (null != rocker){
 ## 如何添加
 
 
+**Step 1. 添加JitPack仓库**
+
+在当前项目等根目录下的 `build.gradle` 文件中添加如下内容:
+
+``` gradle
+	allprojects {
+		repositories {
+			...
+			maven { url "https://jitpack.io" }
+		}
+	}
+```
+
+**Step 2. 添加项目依赖**
+
+``` gradle
+	dependencies {
+	        compile 'com.github.GcsSloop:Rocker:v1.0.0'
+	}
+```
+
 ## About Me
 
 ### 作者微博: [@GcsSloop](http://weibo.com/GcsSloop)
