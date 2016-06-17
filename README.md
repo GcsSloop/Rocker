@@ -26,7 +26,7 @@
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"/>
 ```
-![](http://ww1.sinaimg.cn/large/005Xtdi2jw1f4y0d7x353j30dw0mot99.jpg)
+<img src="http://ww1.sinaimg.cn/large/005Xtdi2jw1f4y0d7x353j30dw0mot99.jpg" width=300 />
  
 ### 自定义参数
 可自定义参数包括:
@@ -55,7 +55,7 @@ refresh_cycle     | 刷新周期 | integer          | 30ms   | 界面刷新周�
 	rocker:rocker_radius="30dp"/>
 ```
 
-![](http://ww3.sinaimg.cn/large/005Xtdi2jw1f4y1bofuu5j30dw0mota1.jpg)
+<img src="http://ww3.sinaimg.cn/large/005Xtdi2jw1f4y1bofuu5j30dw0mota1.jpg" width=300 />
 
 
 
