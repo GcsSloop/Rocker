@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rocker="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:background="#ffffff"
+    tools:context="com.gcssloop.rockertest.MainActivity">
+
+    <com.gcssloop.widget.RockerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        rocker:area_background="@drawable/area_bg"
+        rocker:area_radius="80dp"
+        rocker:refresh_cycle="50"
+        rocker:rocker_background="@drawable/rocker_bg"
+        rocker:rocker_radius="30dp"/>
+
+</RelativeLayout>
