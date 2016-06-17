@@ -57,9 +57,39 @@ refresh_cycle     | 刷新周期 | integer          | 30ms   | 界面刷新周�
 
 <img src="http://ww3.sinaimg.cn/large/005Xtdi2jw1f4y1bofuu5j30dw0mota1.jpg" width=300 />
 
-## 监听回调
+### 监听回调
 
+监听回调可监听到两个事件.
 
+事件类型     | 中文     | 简介
+-------------|----------|----------------------------------------------------------------
+EVENT_ACTION | 操作事件 | 用户点击和滑动时会返回当前角度，当用户手指离开屏幕，返回 -1
+EVENT_CLOCK  | 时钟事件 | 定时返回当前角度，如果没有任何操作，则返回 -1，默认每30ms返回一次
+
+``` java
+RockerView rocker = (RockerView) findViewById(R.id.rocker);
+if (null != rocker){
+    rocker.setListener(new RockerView.RockerListener() {
+        @Override
+        public void callback(int eventType, int currentAngle) {
+            switch (eventType) {
+                case RockerView.EVENT_ACTION:
+                    // 触摸事件回调
+                    Log.e("EVENT_ACTION-------->", "angle="+currentAngle);
+                    break;
+                case RockerView.EVENT_CLOCK:
+                    // 定时回调
+                    Log.e("EVENT_CLOCK", "angle="+currentAngle);
+                    break;
+            }
+        }
+    });
+}
+```
+
+**PS：定时返回与界面刷新周期一致，可以用 'refresh_cycle' 开控制。**
+
+## 如何添加
 
 
 ### 参考的文章： [android 虚拟摇杆图片版](http://blog.csdn.net/jwzhangjie/article/details/8839744)
