@@ -57,6 +57,9 @@ refresh_cycle     | 刷新周期 | integer          | 30ms   | 界面刷新周�
 
 <img src="http://ww3.sinaimg.cn/large/005Xtdi2jw1f4y1bofuu5j30dw0mota1.jpg" width=300 />
 
+## 监听回调
+
+
 
 
 ### 参考的文章： [android 虚拟摇杆图片版](http://blog.csdn.net/jwzhangjie/article/details/8839744)
