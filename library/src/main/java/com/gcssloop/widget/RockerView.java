@@ -15,10 +15,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import com.gcssloop.rocker.R;
 import com.gcssloop.view.utils.DensityUtils;
@@ -45,7 +45,7 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
 
     private SurfaceHolder mHolder;
     private Thread mThread;
-    private boolean isStop = false; // If this view is hide or destroyed, this flag will be true.
+    private boolean drawOk = true;
 
     private Paint mPaint;
 
@@ -78,8 +78,8 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
     public static final int EVENT_ACTION = 1;
     public static final int EVENT_CLOCK = 2;
 
-
     private int mRefreshCycle = 30;
+
 
 
     /*Life Cycle***********************************************************************************/
@@ -213,7 +213,7 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         try {
-            isStop = false;
+            drawOk = true;
             mThread = new Thread(this);
             mThread.start();
         } catch (Exception e) {
@@ -227,13 +227,22 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         try {
-            isStop = true;
+            drawOk = false;
             mThread.destroy();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @Override
+    protected void onVisibilityChanged(View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        if(visibility==VISIBLE) {
+            drawOk = true;
+        } else {
+            drawOk = false;
+        }
+    }
 
     /*Event Response*******************************************************************************/
 
@@ -288,7 +297,7 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
 
         Canvas canvas = null;
 
-        while (!isStop) {
+        while (drawOk) {
             try {
                 canvas = mHolder.lockCanvas();
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
