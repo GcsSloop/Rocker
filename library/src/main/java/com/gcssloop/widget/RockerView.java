@@ -24,9 +24,6 @@ import com.gcssloop.rocker.R;
 import com.gcssloop.view.utils.DensityUtils;
 import com.gcssloop.view.utils.MathUtils;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  * A custom view for game or others.
  * <p/>
@@ -44,11 +41,13 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
     private static int DEFAULT_ROCKER_COLOR = Color.RED;
 
     private static int DEFAULT_REFRESH_CYCLE = 30;
-
+    private static int DEFAULT_CALLBACK_CYCLE = 100;
 
     private SurfaceHolder mHolder;
-    private Thread mThread;
-    private boolean drawOk = true;
+    private static Thread mDrawThread;
+    private static Thread mCallbackThread;
+    private static boolean mDrawOk = true;
+    private static boolean mCallbackOk = true;
 
     private Paint mPaint;
 
@@ -80,9 +79,9 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
     private RockerListener mListener;
     public static final int EVENT_ACTION = 1;
     public static final int EVENT_CLOCK = 2;
-    private Timer tExit = new Timer();
-    private int mRefreshCycle = 100;
 
+    private int mRefreshCycle = DEFAULT_REFRESH_CYCLE;
+    private int mCallbackCycle = DEFAULT_CALLBACK_CYCLE;
 
 
     /*Life Cycle***********************************************************************************/
@@ -124,7 +123,9 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
 
         mAreaRadius = ta.getDimensionPixelOffset(R.styleable.viewsupport_area_radius, DEFAULT_AREA_RADIUS);
         mRockerRadius = ta.getDimensionPixelOffset(R.styleable.viewsupport_rocker_radius, DEFAULT_ROCKER_RADIUS);
+
         mRefreshCycle = ta.getInteger(R.styleable.viewsupport_refresh_cycle, DEFAULT_REFRESH_CYCLE);
+        mCallbackCycle = ta.getInteger(R.styleable.viewsupport_callback_cycle, DEFAULT_CALLBACK_CYCLE);
 
         Drawable area_bg = ta.getDrawable(R.styleable.viewsupport_area_background);
         Drawable rocker_bg = ta.getDrawable(R.styleable.viewsupport_rocker_background);
@@ -212,13 +213,30 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
             mRockerRadius = (int) (tempRadius * 0.25);
     }
 
-
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         try {
-            drawOk = true;
-            mThread = new Thread(this);
-            mThread.start();
+            mDrawThread = new Thread(this);
+            mDrawThread.start();
+
+            mCallbackThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (mCallbackOk){
+
+                        // listener callback
+                        listenerCallback();
+
+                        try {
+                            Thread.sleep(mCallbackCycle);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+            mCallbackThread.start();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -229,21 +247,19 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        try {
-            drawOk = false;
-            mThread.destroy();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            mDrawOk = false;
+            mCallbackOk = false;
     }
 
     @Override
     protected void onVisibilityChanged(View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
         if(visibility==VISIBLE) {
-            drawOk = true;
+            mDrawOk = true;
+            mCallbackOk = true;
         } else {
-            drawOk = false;
+            mDrawOk = false;
+            mCallbackOk = false;
         }
     }
 
@@ -299,26 +315,17 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
         }
 
         Canvas canvas = null;
-        tExit.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                // listener callback
-                listenerCallback();
-            }
-        }, mRefreshCycle,1000);
 
-        while (drawOk) {
+        while (mDrawOk) {
             try {
                 canvas = mHolder.lockCanvas();
-                if(canvas==null) {
-                    drawOk = false;
-                    break;
-                }
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-                // draw area
+
                 drawArea(canvas);
-                // draw rocker
                 drawRocker(canvas);
+
+                Thread.sleep(mRefreshCycle);    // 休眠
+
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -433,6 +440,14 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
 
     public void setRefreshCycle(int refreshCycle) {
         mRefreshCycle = refreshCycle;
+    }
+
+    public int getCallbackCycle() {
+        return mCallbackCycle;
+    }
+
+    public void setCallbackCycle(int callbackCycle) {
+        mCallbackCycle = callbackCycle;
     }
 
     public int getAreaColor() {

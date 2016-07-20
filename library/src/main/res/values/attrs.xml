@@ -7,6 +7,7 @@
         <attr name="area_background" format="color|reference"/>
         <attr name="rocker_background" format="color|reference"/>
         <attr name="refresh_cycle" format="integer"/>
+        <attr name="callback_cycle" format="integer"/>
     </declare-styleable>
 
 </resources>
