@@ -41,7 +41,8 @@ area_radius       | 区域半径 | dimension        | 75dp   | 摇杆可活动�
 rocker_radius     | 摇杆半径 | dimension        | 25dp   | 摇杆本身半径
 area_background   | 区域背景 | color, reference | CYAN   | 区域背景
 rocker_background | 摇杆背景 | color, reference | RED    | 摇杆背景
-refresh_cycle     | 刷新周期 | integer          | 30ms   | 界面刷新周期，默认30毫秒，也意味着每30ms就会发送一次状态数据
+refresh_cycle     | 刷新周期 | integer          | 30ms   | 界面刷新周期，默认30毫秒，每30ms就会刷新一次界面
+callback_cycle    | 回调周期 | integer          | 100ms  | 数据回调周期，默认100毫秒，每100ms就会发送一次界面状态回调
 
 > 
 **视图大小会根据 区域半径以及摇杆半径值自适应，一般使用 wrap_content 即可。**
@@ -113,7 +114,7 @@ if (null != rocker){
 
 ``` gradle
 	dependencies {
-	        compile 'com.github.GcsSloop:Rocker:v1.0.2'
+	        compile 'com.github.GcsSloop:Rocker:v1.0.3'
 	}
 ```
 
