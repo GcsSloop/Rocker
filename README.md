@@ -92,7 +92,7 @@ if (null != rocker){
 }
 ```
 
-**PS：定时返回与界面刷新周期一致，可以用 'refresh_cycle' 开控制。**
+**PS：EVENT_CLOCK是定时返回当前状态的，可以用 'callback_cycle' 来控制数据回调周期。**
 
 ## 如何添加
 
