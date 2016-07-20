@@ -24,6 +24,9 @@ import com.gcssloop.rocker.R;
 import com.gcssloop.view.utils.DensityUtils;
 import com.gcssloop.view.utils.MathUtils;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * A custom view for game or others.
  * <p/>
@@ -77,8 +80,8 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
     private RockerListener mListener;
     public static final int EVENT_ACTION = 1;
     public static final int EVENT_CLOCK = 2;
-
-    private int mRefreshCycle = 30;
+    private Timer tExit = new Timer();
+    private int mRefreshCycle = 100;
 
 
 
@@ -296,23 +299,26 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
         }
 
         Canvas canvas = null;
+        tExit.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // listener callback
+                listenerCallback();
+            }
+        }, mRefreshCycle,1000);
 
         while (drawOk) {
             try {
                 canvas = mHolder.lockCanvas();
+                if(canvas==null) {
+                    drawOk = false;
+                    break;
+                }
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-
                 // draw area
                 drawArea(canvas);
-
                 // draw rocker
                 drawRocker(canvas);
-
-                // listener callback
-                listenerCallback();
-
-                Thread.sleep(mRefreshCycle);    // 休眠
-
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
