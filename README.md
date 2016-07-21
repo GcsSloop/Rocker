@@ -122,6 +122,8 @@ if (null != rocker){
 	}
 ```
 
+## [:point_right:版本更新记录:point_left:](https://github.com/GcsSloop/Rocker/releases)
+
 ## About Me
 
 ### 作者微博: [@GcsSloop](http://weibo.com/GcsSloop)
