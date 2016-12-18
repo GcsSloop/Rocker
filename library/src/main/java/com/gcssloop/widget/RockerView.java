@@ -289,7 +289,10 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
                 }
                 if (mListener != null) {
                     float radian = MathUtils.getRadian(mAreaPosition, new Point((int) event.getX(), (int) event.getY()));
-                    mListener.callback(EVENT_ACTION, getAngleConvert(radian));
+                    int angle = RockerView.this.getAngleConvert(radian);
+                    float distance = MathUtils.getDistance(mAreaPosition.x, mAreaPosition.y, event.getX(), event.getY());
+                    mListener.callback(EVENT_ACTION, angle);
+                    mListener.callback(EVENT_ACTION, angle, distance);
                 }
             }
             //如果手指离开屏幕，则摇杆返回初始位置
@@ -297,6 +300,7 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
                 mRockerPosition = new Point(mAreaPosition);
                 if (mListener != null) {
                     mListener.callback(EVENT_ACTION, -1);
+                    mListener.callback(EVENT_ACTION, -1, 0);
                 }
             }
         } catch (Exception e) {
@@ -373,9 +377,13 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
         if (mListener != null) {
             if (mRockerPosition.x == mAreaPosition.x && mRockerPosition.y == mAreaPosition.y) {
                 mListener.callback(EVENT_CLOCK, -1);
+                mListener.callback(EVENT_CLOCK, -1, 0);
             } else {
                 float radian = MathUtils.getRadian(mAreaPosition, new Point(mRockerPosition.x, mRockerPosition.y));
-                mListener.callback(EVENT_CLOCK, RockerView.this.getAngleConvert(radian));
+                int angle = RockerView.this.getAngleConvert(radian);
+                float distance = MathUtils.getDistance(mAreaPosition.x, mAreaPosition.y, mRockerPosition.x, mRockerPosition.y);
+                mListener.callback(EVENT_CLOCK, angle);
+                mListener.callback(EVENT_CLOCK, angle, distance);
             }
         }
     }
@@ -474,6 +482,9 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
 
     /*Rocker Listener******************************************************************************/
 
+    /**
+     * rocker listener
+     */
     public interface RockerListener {
         /**
          * you can get some event from this method
@@ -482,5 +493,15 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
          * @param currentAngle The current angle
          */
         void callback(int eventType, int currentAngle);
+
+        /**
+         * you can get some event from this method
+         *
+         * @param eventType The event type, EVENT_ACTION or EVENT_CLOCK
+         * @param currentAngle The current angle
+         * @param currentDistance The current distance (px)
+         */
+        void callback(int eventType, int currentAngle, float currentDistance);
     }
+
 }

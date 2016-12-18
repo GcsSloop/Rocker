@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         rocker:area_background="@drawable/area_bg"
         rocker:area_radius="80dp"
+        rocker:callback_cycle="300"
         rocker:rocker_background="@drawable/rocker_bg"
         rocker:rocker_radius="30dp"/>
 
