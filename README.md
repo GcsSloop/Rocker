@@ -118,7 +118,7 @@ if (null != rocker){
 
 ``` gradle
 	dependencies {
-	        compile 'com.github.GcsSloop:Rocker:v1.0.3'
+	        compile 'com.github.GcsSloop:Rocker:v1.1.1'
 	}
 ```
 
