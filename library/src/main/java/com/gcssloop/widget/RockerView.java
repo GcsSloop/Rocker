@@ -291,7 +291,6 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
                     float radian = MathUtils.getRadian(mAreaPosition, new Point((int) event.getX(), (int) event.getY()));
                     int angle = RockerView.this.getAngleConvert(radian);
                     float distance = MathUtils.getDistance(mAreaPosition.x, mAreaPosition.y, event.getX(), event.getY());
-                    mListener.callback(EVENT_ACTION, angle);
                     mListener.callback(EVENT_ACTION, angle, distance);
                 }
             }
@@ -299,7 +298,6 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 mRockerPosition = new Point(mAreaPosition);
                 if (mListener != null) {
-                    mListener.callback(EVENT_ACTION, -1);
                     mListener.callback(EVENT_ACTION, -1, 0);
                 }
             }
@@ -376,13 +374,11 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
     private void listenerCallback() {
         if (mListener != null) {
             if (mRockerPosition.x == mAreaPosition.x && mRockerPosition.y == mAreaPosition.y) {
-                mListener.callback(EVENT_CLOCK, -1);
                 mListener.callback(EVENT_CLOCK, -1, 0);
             } else {
                 float radian = MathUtils.getRadian(mAreaPosition, new Point(mRockerPosition.x, mRockerPosition.y));
                 int angle = RockerView.this.getAngleConvert(radian);
                 float distance = MathUtils.getDistance(mAreaPosition.x, mAreaPosition.y, mRockerPosition.x, mRockerPosition.y);
-                mListener.callback(EVENT_CLOCK, angle);
                 mListener.callback(EVENT_CLOCK, angle, distance);
             }
         }
@@ -486,13 +482,6 @@ public class RockerView extends SurfaceView implements Runnable, SurfaceHolder.C
      * rocker listener
      */
     public interface RockerListener {
-        /**
-         * you can get some event from this method
-         *
-         * @param eventType    The event type, EVENT_ACTION or EVENT_CLOCK
-         * @param currentAngle The current angle
-         */
-        void callback(int eventType, int currentAngle);
 
         /**
          * you can get some event from this method

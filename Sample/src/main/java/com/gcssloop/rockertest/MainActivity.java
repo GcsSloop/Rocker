@@ -17,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
             RockerView rocker = (RockerView) findViewById(R.id.rocker);
             if (null != rocker){
                 rocker.setListener(new RockerView.RockerListener() {
-                    @Override
-                    public void callback(int eventType, int currentAngle) {
-                    }
 
                     @Override
                     public void callback(int eventType, int currentAngle, float currentDistance) {
